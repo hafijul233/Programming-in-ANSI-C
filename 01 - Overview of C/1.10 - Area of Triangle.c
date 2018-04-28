@@ -3,16 +3,15 @@
 
 int main()
 {
-    int a,b,c;
-    float s, area;
+    float a,b,c,s, area ;
 
-    a = 1;
-    b = 2;
-    c = 3;
+    a = 10.12;
+    b = 20.24;
+    c = 45.36;
 
-    s = (a+b+c)/2.0;
-    area = sqrt(s)*sqrt(s-a)*sqrt(s-b)*sqrt(s-c);
-        printf("Area of Triangle: %f",area);
+    s = a+b+c/2.0;
+    area = sqrt(s)*sqrt(s - a)*sqrt(s - b)*sqrt(s - c);
+        printf("Area of Triangle: %0.4f",area);
 
     return 0;
 }
