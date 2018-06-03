@@ -1,2 +1,3 @@
 6.17 Sin(x) Wave
 7.5 Examination Results
+7.8 Matrix Patterns
