@@ -7,7 +7,8 @@
 int main()
 {
     int i, j, k, l;
-    char str[] = {"123456789"};
+
+    char str[] = {"abcdefghijklmnopqrstuvwxyz"};
 
     l = (strlen(str)/2)+1;
     for(i=0; i<l; i++)
