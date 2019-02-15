@@ -1,46 +1,70 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct date
+typedef struct date
 {
     int day;
     int month;
     int year;
 
-};
+} Date;
 
 char months[12][10] = {"January", "February", "March", "April", "May", "June","July",
-                        "August", "September", "October", "November", "December"};
+                       "August", "September", "October", "November", "December"
+                      };
 
 int month_limit[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+Date next_date(Date current, int range)
+{
+    Date next;
+
+    next.year = range /365;
+    range%=365;
+
+    next.month = range /30;
+    range%=30;
+
+    next.day = range;
+//    printf("\nRange:\nDays: %d\tMonths: %d\tYears: %d\n",next.day,next.month,next.year);
+
+    //Adding the date with input date
+    current.year += next.year;
+    current.month += next.month;
+    current.day += next.day;
+
+    if(current.day > month_limit[current.month - 1]) {
+        current.day -= month_limit[current.month - 1];
+        current.month++;
+    }
+
+    if(current.month > 12) {
+        current.month -= 12;
+        current.year++;
+    }
+
+    return (current);
+}
+
 int main()
 {
-    struct date new_date;
-    int choice, date_range;
+    Date input_date,result_date;
+    int choice, range;
     while(1)
     {
-        printf("\tDate Converter\n    --------------------\n");
+        printf("\tNext Date Finder\n    --------------------\n");
         printf("Enter a Date(dd,mm,yyyy): ");
-        scanf("%d, %d, %d", &new_date.day, &new_date.month, &new_date.year);
+        scanf("%d, %d, %d", &input_date.day,
+                            &input_date.month,
+                            &input_date.year);
 
-        printf("Enter Next Date Range: ");
-            scanf("%d",&date_range);
+        printf("Enter Next Date Range(days): ");
+        scanf("%d",&range);
 
-        new_date.day +=date_range;
-        if(new_date.day > month_limit[new_date.month - 1]){
-            new_date.month+1;
-        }
+        result_date = next_date(input_date, range);//retreiving the update date
 
-        new_date.year = date / 10000; //for year
-        date%=10000;
 
-        new_date.month = date / 100; // for month
-        date%=100;
-
-        new_date.day = date ; // for day
-
-        printf("Entered Date: %s %d, %d\n",months[new_date.month - 1], new_date.day, new_date.year);
+        printf("Next Date Will be : %s %d, %d\n",months[result_date.month - 1], result_date.day, result_date.year);
 
         printf("\n\tWanna Enter another Date(1/0): ");
         scanf("%d",&choice);
